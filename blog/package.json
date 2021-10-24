@@ -25,6 +25,7 @@
     "gatsby-source-filesystem": "^4.0.0",
     "gatsby-transformer-remark": "^5.0.0",
     "gatsby-transformer-sharp": "^4.0.0",
+    "openpgp": "^5.0.0",
     "prismjs": "^1.25.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -33,6 +34,20 @@
     "typeface-montserrat": "0.0.75"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.12.1",
+    "babel-eslint": "^10.1.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.8.1",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-wesbos": "^1.0.1",
+    "eslint-plugin-html": "^6.1.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.2",
+    "esm": "^3.2.25",
     "prettier": "^2.4.1"
   },
   "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
@@ -46,12 +61,12 @@
     "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
   },
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
+    "build": "cross-env gatsby build",
+    "develop": "cross-env gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "start": "gatsby develop",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
+    "start": "cross-env NODE_OPTIONS=\"-r esm\" gatsby develop",
+    "serve": "cross-env NODE_OPTIONS=\"-r esm\" gatsby serve",
+    "clean": "cross-env NODE_OPTIONS=\"-r esm\" gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   }
 }

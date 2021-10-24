@@ -1,11 +1,38 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
+//TODO: #1 Replace with `import * as openpgp from 'openpgp/lightweight';` 
+import * as openpgp from "openpgp";
+
+import { useState, useEffect } from 'react';
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 
 const ArticleBody = ({html}) => {
+
+  (async () => {
+    const message = await openpgp.createMessage({ text: 'Hello, World!' })
+    const encrypted = await openpgp.encrypt({
+        message, // input as Message object
+        passwords: ['secret stuff'], // multiple passwords possible
+        format: 'binary' // don't ASCII armor (for Uint8Array output)
+    });
+    console.log(encrypted); // Uint8Array
+
+    const encryptedMessage = await openpgp.readMessage({
+        binaryMessage: encrypted // parse encrypted bytes
+    });
+    const { data: decrypted } = await openpgp.decrypt({
+        message: encryptedMessage,
+        passwords: ['secret stuff'], // decrypt with password
+        format: 'binary' // output as Uint8Array
+    });
+    console.log(decrypted); // Uint8Array([0x01, 0x01, 0x01])
+  })();
+
+
+
   return (<section
     dangerouslySetInnerHTML={{ __html: html }}
     itemProp="articleBody"
